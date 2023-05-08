@@ -1,0 +1,143 @@
+(kicad_sch (version 20211123) (generator eeschema)
+
+  (uuid 0d66bee2-895a-43c9-b0a8-f8c61a5e9235)
+
+  (paper "A")
+
+  (title_block
+    (title "Arduino Uno Actuator Controller")
+    (date "2023-05-08")
+    (rev "1")
+    (company "Fluxus")
+    (comment 1 "Sean Rhinehart")
+  )
+
+  (lib_symbols
+  )
+
+
+  (text "1    2023-05-08  Sean R.   N/A    Initial prototype for take-home project."
+    (at 66.04 102.235 0)
+    (effects (font (size 2.54 2.54)) (justify left bottom))
+    (uuid 405e7fee-1ed2-4e9a-9e9c-273c4e0f12a5)
+  )
+  (text "Revision History" (at 108.585 82.55 0)
+    (effects (font (size 3.81 3.81)) (justify left bottom))
+    (uuid 5553bc7f-4d46-4755-9b85-5653882b905b)
+  )
+  (text "Prototype Arduino Uno Actuator Controller" (at 57.785 71.755 0)
+    (effects (font (size 5.08 5.08)) (justify left bottom))
+    (uuid 7a838c2d-e1cf-4774-8a2b-5c2ec1d16bf4)
+  )
+  (text "Rev   Date   Engr.  ECO#          Summary" (at 64.135 94.615 0)
+    (effects (font (size 3.81 3.81)) (justify left bottom))
+    (uuid d911cb99-7bb1-4780-9811-1186177fc941)
+  )
+
+  (sheet (at 29.21 23.495) (size 52.07 26.035) (fields_autoplaced)
+    (stroke (width 0.1524) (type solid) (color 0 0 0 0))
+    (fill (color 0 0 0 0.0000))
+    (uuid f92d3dfd-e711-4e17-91bb-776d676b65a8)
+    (property "Sheet name" "Page2" (id 0) (at 29.21 22.7834 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+    )
+    (property "Sheet file" "Page2.kicad_sch" (id 1) (at 29.21 50.1146 0)
+      (effects (font (size 1.27 1.27)) (justify left top))
+    )
+  )
+
+  (sheet_instances
+    (path "/" (page "1"))
+    (path "/f92d3dfd-e711-4e17-91bb-776d676b65a8" (page "2"))
+  )
+
+  (symbol_instances
+    (path "/f92d3dfd-e711-4e17-91bb-776d676b65a8/0072f6ef-a0db-4c34-a5db-1f077c37f38f"
+      (reference "#PWR?") (unit 1) (value "GND") (footprint "")
+    )
+    (path "/f92d3dfd-e711-4e17-91bb-776d676b65a8/181f90eb-53ed-485c-8452-470b78fbae6f"
+      (reference "#PWR?") (unit 1) (value "+12V") (footprint "")
+    )
+    (path "/f92d3dfd-e711-4e17-91bb-776d676b65a8/2b6a69dc-4e9e-4051-9b3e-6c55e433a4aa"
+      (reference "#PWR?") (unit 1) (value "+12V") (footprint "")
+    )
+    (path "/f92d3dfd-e711-4e17-91bb-776d676b65a8/8ad751d3-4d1b-4627-8da9-e39d2b9a7d68"
+      (reference "#PWR?") (unit 1) (value "GND") (footprint "")
+    )
+    (path "/f92d3dfd-e711-4e17-91bb-776d676b65a8/8e521e98-a6bf-419d-8d11-709a8c71fc5b"
+      (reference "#PWR?") (unit 1) (value "+5V") (footprint "")
+    )
+    (path "/f92d3dfd-e711-4e17-91bb-776d676b65a8/8e680fb5-e777-4ba8-b8ed-b4d517fbdef6"
+      (reference "#PWR?") (unit 1) (value "GND") (footprint "")
+    )
+    (path "/f92d3dfd-e711-4e17-91bb-776d676b65a8/92f70369-19e1-4321-8956-a9c4dbd5c491"
+      (reference "#PWR?") (unit 1) (value "GND") (footprint "")
+    )
+    (path "/f92d3dfd-e711-4e17-91bb-776d676b65a8/ab65e303-88dc-4379-9c83-af6332c0cc30"
+      (reference "#PWR?") (unit 1) (value "GND") (footprint "")
+    )
+    (path "/f92d3dfd-e711-4e17-91bb-776d676b65a8/b5ac01d2-9a28-4e78-9969-d2fded6a2cd2"
+      (reference "#PWR?") (unit 1) (value "+5V") (footprint "")
+    )
+    (path "/f92d3dfd-e711-4e17-91bb-776d676b65a8/c416af18-3563-464b-adb7-7cad6f00c8b4"
+      (reference "#PWR?") (unit 1) (value "GND") (footprint "")
+    )
+    (path "/f92d3dfd-e711-4e17-91bb-776d676b65a8/e6e1a1e4-43e5-4d32-ba1d-cda92ddbafcb"
+      (reference "#PWR?") (unit 1) (value "GND") (footprint "")
+    )
+    (path "/f92d3dfd-e711-4e17-91bb-776d676b65a8/fd4a58be-19a1-4990-be0f-0de098d92d17"
+      (reference "C1") (unit 1) (value ".1uF") (footprint "")
+    )
+    (path "/f92d3dfd-e711-4e17-91bb-776d676b65a8/8f9e9e6d-e616-4280-a5fa-d4b20b2a030f"
+      (reference "C2") (unit 1) (value ".1uF") (footprint "")
+    )
+    (path "/f92d3dfd-e711-4e17-91bb-776d676b65a8/257b2e4e-055b-468a-91be-528fbbb778cc"
+      (reference "J1") (unit 1) (value "Conn_01x02") (footprint "")
+    )
+    (path "/f92d3dfd-e711-4e17-91bb-776d676b65a8/68fbcc3c-b428-4545-967e-9beb5c5518ee"
+      (reference "J2") (unit 1) (value "Conn_01x03") (footprint "")
+    )
+    (path "/f92d3dfd-e711-4e17-91bb-776d676b65a8/85514dde-9069-4955-93df-ed15b157fb96"
+      (reference "J3") (unit 1) (value "Conn_01x03") (footprint "")
+    )
+    (path "/f92d3dfd-e711-4e17-91bb-776d676b65a8/7a577c0e-a816-49eb-a61a-9b239714335d"
+      (reference "J4") (unit 1) (value "Conn_01x08") (footprint "")
+    )
+    (path "/f92d3dfd-e711-4e17-91bb-776d676b65a8/4b14e05e-230b-4390-88f2-d79de2419122"
+      (reference "J5") (unit 1) (value "Conn_01x02") (footprint "")
+    )
+    (path "/f92d3dfd-e711-4e17-91bb-776d676b65a8/76f965a7-ee55-4f78-ae3a-5be9e3d9b736"
+      (reference "JP1") (unit 1) (value "Jumper_2_Open") (footprint "")
+    )
+    (path "/f92d3dfd-e711-4e17-91bb-776d676b65a8/a542c656-6d5e-424c-bebe-bb9efea2fe59"
+      (reference "R1") (unit 1) (value "1K") (footprint "")
+    )
+    (path "/f92d3dfd-e711-4e17-91bb-776d676b65a8/e7fc4b3e-00a8-4195-a90f-adf3a3bf8688"
+      (reference "R2") (unit 1) (value "10K") (footprint "")
+    )
+    (path "/f92d3dfd-e711-4e17-91bb-776d676b65a8/5e868443-be55-469f-895f-5924fc2cd656"
+      (reference "R3") (unit 1) (value "1K") (footprint "")
+    )
+    (path "/f92d3dfd-e711-4e17-91bb-776d676b65a8/d1dab4d1-1360-4abe-b5e7-90db725f8d79"
+      (reference "R4") (unit 1) (value "10K") (footprint "")
+    )
+    (path "/f92d3dfd-e711-4e17-91bb-776d676b65a8/2c79faa0-367d-410b-929e-eee428c36d87"
+      (reference "R5") (unit 1) (value "1K") (footprint "")
+    )
+    (path "/f92d3dfd-e711-4e17-91bb-776d676b65a8/4c8dbbf1-f3bc-4f0c-b4fb-945739c5605e"
+      (reference "U1") (unit 1) (value "4093") (footprint "")
+    )
+    (path "/f92d3dfd-e711-4e17-91bb-776d676b65a8/c4d70af8-5adb-4c26-8c57-a1c12065f9eb"
+      (reference "U1") (unit 2) (value "4093") (footprint "")
+    )
+    (path "/f92d3dfd-e711-4e17-91bb-776d676b65a8/8a90b1fa-7779-44bd-b306-42d5dcb90f52"
+      (reference "U1") (unit 3) (value "4093") (footprint "")
+    )
+    (path "/f92d3dfd-e711-4e17-91bb-776d676b65a8/32d941ca-07e1-47e9-81e5-6cbd94c5e583"
+      (reference "U1") (unit 4) (value "4093") (footprint "")
+    )
+    (path "/f92d3dfd-e711-4e17-91bb-776d676b65a8/4e51c7be-5689-4060-9944-a768ee0964e6"
+      (reference "U2") (unit 1) (value "L293D") (footprint "Package_DIP:DIP-16_W7.62mm")
+    )
+  )
+)
