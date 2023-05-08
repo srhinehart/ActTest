@@ -1,0 +1,23 @@
+﻿using System;
+using System.Windows.Forms;
+using Fluxus;
+
+namespace ActTest
+{
+    static class Program
+    {
+        public static AppSettings Settings = new AppSettings();
+        public static LogWrapper LogWrap = new LogWrapper(Settings.LogFilename);
+
+        /// <summary>
+        /// The main entry point for the application.
+        /// </summary>
+        [STAThread]
+        static void Main()
+        {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new frmMain());
+        }
+    }
+}
