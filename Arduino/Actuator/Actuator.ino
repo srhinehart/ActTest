@@ -128,7 +128,7 @@ unsigned long tickTargetSet;  // millis() value when target parameter was last s
 uint16_t table[CRC_TABLE_SIZE];
 
 #define ESC 0x1b
-#define VERSION "Fluxus Fluidics Head Controller Firmware Version 1.0.1"	// used for connection verification
+#define VERSION "Fluxus Fluidics Head Controller Firmware Version 1.0"	// used for connection verification
 #define PROMPT "Cmd> "
 
 // Indent for "purpose" column, used when enumerating and explaining commands and parameters
@@ -176,10 +176,10 @@ void explainCommand(cmd_t cmd)
       fmem_println("Displays high-level help, and sets Interactive mode.");
       break;
     case cmJogUp:
-      fmem_println("Takes small step toward upper limit.");
+      fmem_println("Takes small step toward upper limit. Only works in interactive mode.");
       break;
     case cmJogDn:
-      fmem_println("Takes small step toward lower limit.");
+      fmem_println("Takes small step toward lower limit. Only works in interactive mode.");
       break;
     case cmReset:
       fmem_println("Resets this controller. This allows recovery from a Faulted condition.");
@@ -446,13 +446,13 @@ error_t checkLimitSwitches()
 
   if (swUpper == HIGH)
   {
-    // The upper limit switch is closed.
+    // We closed the upper limit switch
     if (swLower == HIGH)
       return disableDriver(eFaultSwitches); // error if both limit switches HIGH at same time.
     if (CurPos == POSITION_UNKNOWN)
     {
-      // We just reached the upper position now, because CurPos has not been updated.
-      // TargetPos can be POSITION_UNKNOWN if jogging.
+      // We just reached the upper position now, because CurPos has not been updated
+      // TargetPos can be POSITION_UNKNOWN if jogging
       if (TargetPos == POSITION_LOWER)
         return disableDriver(eFaultPolarity); // hit wrong limit switch
       else if (TargetPos == POSITION_UPPER)
@@ -462,11 +462,11 @@ error_t checkLimitSwitches()
   }
   else if (swLower == HIGH)
   {
-    // The lower limit switch is closed.
+    // We closed the lower limit switch
     if (CurPos == POSITION_UNKNOWN)
     {
-      // We just reached the lower position now, because CurPos has not been updated.
-      // TargetPos can be POSITION_UNKNOWN if jogging.
+      // We just reached the lower position now, because CurPos has not been updated
+      // TargetPos can be POSITION_UNKNOWN if jogging
       if (TargetPos == POSITION_UPPER)
         return disableDriver(eFaultPolarity); // hit wrong limit switch
       else if (TargetPos == POSITION_LOWER)
@@ -527,11 +527,11 @@ error_t setTarget(int newTarget)
 error_t jog(int dir)
 {
     digitalWrite(pinMtrEnable, LOW); // disable driver while we are setting up the mtrA and mtrB pin states
-    // good practice, and creates rising edge trigger condition for debugging
 
     //if (!StatReg.Bits.Interactive)
     //  return eNotInteractive;
       
+    // good practice, and creates rising edge trigger condition for debugging
     fmem_print("Jogging: ");
     Serial.println(dir, DEC);
     TargetPos = POSITION_UNKNOWN;
@@ -547,7 +547,7 @@ error_t jog(int dir)
     digitalWrite(pinMtrA, InitDirA); 
     digitalWrite(pinMtrB, !InitDirA);
     digitalWrite(pinMtrEnable, HIGH);
-    delay(150);
+    delay(200);
     return disableDriver(eNone);  
 }
 
@@ -593,7 +593,8 @@ error_t processCmd()
       break;
       
     case cmToggle:
-      err = setTarget((TargetPos == POSITION_UNKNOWN) ? TARGET0 : !TargetPos);
+      int NewTarget = (TargetPos == POSITION_UNKNOWN) ? TARGET0 : !TargetPos;
+      err = setTarget(NewTarget);
       break;
 
     default:
@@ -707,7 +708,7 @@ error_t processParamSet(char* strVal)
     case ptPos:
       err = checkLimitSwitches();
       if (err == eNone)
-        err = parseInt(strVal, &val, POSITION_LOWER, POSITION_UPPER);
+        err = parseInt(strVal, &val, 0, 1);
       if (err == eNone)
         err = setTarget(val);
       break;
@@ -715,10 +716,10 @@ error_t processParamSet(char* strVal)
     case ptTarg:
       err = checkLimitSwitches();
       if (err == eNone)
-        err = parseInt(strVal, &val, POSITION_UNKNOWN, POSITION_UPPER);
+        err = parseInt(strVal, &val, -1, 1);
       if (err == eNone)
       {
-        if (val == POSITION_UNKNOWN)
+        if (val == -1)
           TargetPos = POSITION_UNKNOWN;
         else
           err = setTarget(val);
@@ -986,7 +987,7 @@ void setup()
   //reportError(err, NULL); // report any error to console, but do not issue prompt yet.
 
   
-  fmem_println("At the 'Cmd>' prompt, type 'help!' and then <Enter> for interactive mode.");
+  fmem_println("At the ""Cmd>"" prompt, type ""help!"" and then <Enter> for interactive mode.");
   fmem_println("Interactive mode will relax the command line CRC requirements, and enable serial echo.");
   Serial.println();
   sendPrompt();
