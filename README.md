@@ -10,3 +10,5 @@ OpenSCAD
   Contains the .scad file used to produce the limit switch mounting brackets.
 VS 2010
   Contains the Visual Studio 2010 source code to create ActTest.exe.
+KiCad
+  Contains schematic for prototype actuator driver board, controlled by an Arduino Uno.
