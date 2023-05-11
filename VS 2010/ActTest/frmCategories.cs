@@ -74,15 +74,13 @@ namespace LogViewer
         {
             if (myReader != null && myReader.CategoryIsVisible != null)
             {
-                //myReader.VisibleCategories.Clear();
                 int index = 0;
                 while (index < clbCategories.Items.Count)
                 {
-                    //if (clbCategories.GetItemChecked(index))
-                    //    myReader.VisibleCategories.Add(index);
                     myReader.CategoryIsVisible[index] = clbCategories.GetItemChecked(index);
                     index++;
                 }
+                this.DialogResult = System.Windows.Forms.DialogResult.OK;
             }
             this.Close();
         }

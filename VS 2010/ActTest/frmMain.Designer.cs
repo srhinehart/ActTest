@@ -48,13 +48,13 @@
             this.btnOpenPort = new System.Windows.Forms.Button();
             this.cboPort = new System.Windows.Forms.ComboBox();
             this.grpReads = new System.Windows.Forms.GroupBox();
+            this.btnQueryError = new System.Windows.Forms.Button();
             this.btnQueryStatus = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.txtQueryResult = new System.Windows.Forms.TextBox();
             this.grpWrites = new System.Windows.Forms.GroupBox();
             this.btnMoveLower = new System.Windows.Forms.Button();
             this.btnMoveUpper = new System.Windows.Forms.Button();
-            this.btnQueryError = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.grpUser.SuspendLayout();
@@ -155,7 +155,7 @@
             this.grpUser.Size = new System.Drawing.Size(232, 182);
             this.grpUser.TabIndex = 2;
             this.grpUser.TabStop = false;
-            this.grpUser.Text = "Raw Commands";
+            this.grpUser.Text = "User Commands";
             this.grpUser.Visible = false;
             // 
             // label2
@@ -250,6 +250,17 @@
             this.grpReads.Text = "Status Queries";
             this.grpReads.Visible = false;
             // 
+            // btnQueryError
+            // 
+            this.btnQueryError.Location = new System.Drawing.Point(127, 19);
+            this.btnQueryError.Name = "btnQueryError";
+            this.btnQueryError.Size = new System.Drawing.Size(92, 23);
+            this.btnQueryError.TabIndex = 12;
+            this.btnQueryError.Tag = "1";
+            this.btnQueryError.Text = "Query Last Error";
+            this.btnQueryError.UseVisualStyleBackColor = true;
+            this.btnQueryError.Click += new System.EventHandler(this.btnQueryError_Click);
+            // 
             // btnQueryStatus
             // 
             this.btnQueryStatus.Location = new System.Drawing.Point(7, 19);
@@ -313,17 +324,6 @@
             this.btnMoveUpper.Text = "Upper Limit";
             this.btnMoveUpper.UseVisualStyleBackColor = true;
             this.btnMoveUpper.Click += new System.EventHandler(this.btnMoveUpper_Click);
-            // 
-            // btnQueryError
-            // 
-            this.btnQueryError.Location = new System.Drawing.Point(127, 19);
-            this.btnQueryError.Name = "btnQueryError";
-            this.btnQueryError.Size = new System.Drawing.Size(92, 23);
-            this.btnQueryError.TabIndex = 12;
-            this.btnQueryError.Tag = "1";
-            this.btnQueryError.Text = "Query Last Error";
-            this.btnQueryError.UseVisualStyleBackColor = true;
-            this.btnQueryError.Click += new System.EventHandler(this.btnQueryError_Click);
             // 
             // frmMain
             // 

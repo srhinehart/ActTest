@@ -69,6 +69,7 @@ namespace ActTest
             string RawLine = string.Format("{0}!", Name);
             return UseCRC ? CalcCRC(RawLine) : RawLine;
         }
+
         private OpResult VerifyResponse(uint? eidParent, OpType opType, string Response)
         {
             OpResult result = OpResult.Error;
@@ -170,7 +171,7 @@ namespace ActTest
                         {
                             Response = DataRead.Substring(0, index);
                             DataRead = DataRead.Substring(index);
-                            Program.LogWrap.LogEntry(eidCommand, LogCat.Response, "Raw Response", Response);
+                            //Program.LogWrap.LogEntry(eidCommand, LogCat.Response, "Raw Response", Response);
                             result = VerifyResponse(eidCommand, opType, Response);
                             break;
                         }

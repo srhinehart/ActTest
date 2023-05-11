@@ -328,6 +328,7 @@
             this.treeView1.SelectedImageIndex = 0;
             this.treeView1.Size = new System.Drawing.Size(703, 480);
             this.treeView1.TabIndex = 2;
+            this.treeView1.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseClick);
             // 
             // imageListSmall
             // 
@@ -359,7 +360,7 @@
             this.tmrLogPolling.Interval = 2000;
             this.tmrLogPolling.Tick += new System.EventHandler(this.tmrLogPolling_Tick);
             // 
-            // frmViewer
+            // frmLogViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -369,7 +370,7 @@
             this.Controls.Add(this.menuStrip1);
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "frmViewer";
+            this.Name = "frmLogViewer";
             this.Text = "Log Viewer";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmViewer_FormClosed);
             this.menuStrip1.ResumeLayout(false);

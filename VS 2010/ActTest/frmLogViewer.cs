@@ -21,6 +21,7 @@ namespace LogViewer
             InitializeComponent();
             myReader = new LogReader();
             myReader.tv = treeView1;
+            myReader.myOwner = this;    // so myReader can call this.SetStatusMessage()
 
             // make sure GUI reflects default options
             UpdateVisibilityMenuCheckMarks();
@@ -48,20 +49,29 @@ namespace LogViewer
 
         public void OpenFile(string Filename)
         {
+            myReader.tv.Nodes.Clear();
             myReader.Entries.Clear();
             myReader.OpenLogFile(Filename);
-            EnableLogPolling("");
+            EnableLogPolling(null);
+        }
+
+        public void SetStatusMessage(string msg)
+        {
+            tsslStatus.Text = msg;
+            Application.DoEvents();
         }
 
         private void EnableLogPolling(string Msg)
         {
-            tsslStatus.Text = Msg;
+            if (Msg != null)
+                tsslStatus.Text = Msg;
             tmrLogPolling.Enabled = true;
         }
 
         private void DisableLogPolling(string Msg)
         {
-            tsslStatus.Text = Msg;
+            if (Msg != null)
+                tsslStatus.Text = Msg;
             tmrLogPolling.Enabled = false; // disable polling until next refresh
         }
 
@@ -154,7 +164,7 @@ namespace LogViewer
             tsmiShowTimestamps.Checked = !tsmiShowTimestamps.Checked;
 
             myReader.ShowTimeStamps = tsmiShowTimestamps.Checked;
-            myReader.RefreshTree();
+            myReader.RebuildTree();
         }
 
         private void frmViewer_FormClosed(object sender, FormClosedEventArgs e)
@@ -162,6 +172,8 @@ namespace LogViewer
             if (Manager != null)
                 Manager.frmLogView = null;
 
+            SetStatusMessage("Closing...");
+            treeView1.Nodes.Clear();
             if (myReader != null)
             {
                 myReader.Dispose();
@@ -173,15 +185,29 @@ namespace LogViewer
         {
             frmCategories frm = new frmCategories();
             frm.Reader = myReader;
-            frm.ShowDialog();
-            myReader.RebuildTree();
+            System.Windows.Forms.DialogResult result = frm.ShowDialog();
+            if (result == System.Windows.Forms.DialogResult.OK)
+                myReader.RebuildTree();
         }
 
         private void tmrLogPolling_Tick(object sender, EventArgs e)
         {
-            if (myReader.NewDataIsAvailable())
-                DisableLogPolling("New data is available. Click on View/Refresh to get it.");
+            if (myReader != null && myReader.NewDataIsAvailable())
+                DisableLogPolling("New data is available. Click on View/Refresh to see it.");
         }
 
+        private void treeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            if (e.Button == System.Windows.Forms.MouseButtons.Right && e.Node != null)
+            {
+                // TODO: replace with entry viewing form
+                LogEntry entry = e.Node.Tag as LogEntry;
+                if (entry != null)
+                {
+                    string msg = LogEntry.FirstNlines(entry.Msg2, 20);    // Only truncated if needed
+                    MessageBox.Show(msg);
+                }
+            }
+        }
     }
 }
