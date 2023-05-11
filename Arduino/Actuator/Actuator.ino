@@ -128,7 +128,7 @@ unsigned long tickTargetSet;  // millis() value when target parameter was last s
 uint16_t table[CRC_TABLE_SIZE];
 
 #define ESC 0x1b
-#define VERSION "Fluxus Fluidics Head Controller Firmware Version 1.0.1"	// used for connection verification
+#define VERSION "Fluxus Fluidics Head Controller Firmware Version 1.0.2"	// used for connection verification
 #define PROMPT "Cmd> "
 
 // Indent for "purpose" column, used when enumerating and explaining commands and parameters
@@ -235,7 +235,7 @@ void explainParam(param_t p)
       fmem_println("Read-only firmware version string.");
       break;
     case ptPartNum:
-      fmem_println("Read-only PCBA part number for CRISP controller.");
+      fmem_println("Read-only PCBA part number for controller board.");
       break;
     case ptError:
       fmem_println("Read-only copy of last error reported.");
@@ -250,7 +250,7 @@ void explainParam(param_t p)
       fmem_println("Read-only Status register.");
       break;
     case ptTarg:
-      fmem_println("Actuator target position.");
+      fmem_println("Actuator target position. 0=lower limit, 1=upper limit.");
       break;
 
     default: Serial.println(); break;
@@ -356,7 +356,7 @@ void reportErrorContext(error_t err)
       break;
       
     case eNotInteractive:
-      fmem_println("Jogging commands can only be run when in interactive mode, via !help."); // Not true anymore
+      fmem_println("Jogging commands can only be run when in interactive mode, via !help."); // Not true anymore, this error message will no longer occur.
       break;
       
     case eFaultSwitches:
@@ -981,7 +981,7 @@ void setup()
   fmem_println("FW initialization complete.");
   Serial.println();
   
-  // automatic moving to specified target position has been disabled, because limit switches are not reliably stopping my homebuilt actuator simulator.
+  // Automatic moving to pre-specified target position has been disabled, because limit switches are not reliably stopping my homebuilt actuator simulator.
   //error_t err = setTarget(TARGET0); // attempt to move actuator to initial position
   //reportError(err, NULL); // report any error to console, but do not issue prompt yet.
 
