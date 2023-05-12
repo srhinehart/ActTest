@@ -40,7 +40,7 @@ namespace ActTest
             btnSend.Enabled = false;
             cboPort.Text = szEmpty;
             if (myController != null)
-                myController.AssignSerialPort(null);
+                myController.AssignSerialPort(null, null);
             ports = Support_Serial.PortList();
             Support_Serial.PopulateComboBoxWithPortNames(ports, cboPort, szUnknown, szEmpty);
         }
@@ -170,7 +170,7 @@ namespace ActTest
         private void btnOpenPort_Click(object sender, EventArgs e)
         {
             SerialPort sp = Support_Serial.SelectPort(eidInit, Log, ports, cboPort.SelectedItem.ToString(), 115200, "Test");
-            myController.AssignSerialPort(sp);
+            myController.AssignSerialPort(eidInit, sp);
             bool Success = (myController.VerifyConnection(null) == OpResult.Success);
             tsslStatus.Text = Success ? "Actuator connection verified" : "Actuator not found";
             SetConnectionStatus(Success);

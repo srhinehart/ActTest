@@ -100,10 +100,11 @@ namespace ActTest
                     else
                         result = OpResult.Success;  // if no CRC, assume data is good
                 }
+
                 if (result == OpResult.Success)
-                {
                     Program.LogWrap.LogEntry(eidParent, SeverityCode.Info, LogCat.Response, "Response value", Response);
-                }
+                else
+                    Program.LogWrap.LogEntry(eidParent, SeverityCode.Error, LogCat.Response, "Error response", Response);
             }
             catch (Exception e)
             {
@@ -126,16 +127,24 @@ namespace ActTest
             return OpType.Unknown;
         }
 
-        public void AssignSerialPort(SerialPort port)
+        public void AssignSerialPort(uint? eid, SerialPort port)
         {
             sp = port;
             if (sp != null)
             {
-                sp.Encoding = Encoding.ASCII;
-                sp.NewLine = "\r";  // Used only for writing, not reading
-                sp.WriteLine("\0x1B");  // ESC to purge any partial command line
-                Thread.Sleep(100);
-                sp.ReadExisting();
+                try
+                {
+                    sp.Encoding = Encoding.ASCII;
+                    sp.NewLine = "\r";  // Used only for writing, not reading
+                    sp.WriteLine("\0x1B");  // ESC to purge any partial command line
+                    Thread.Sleep(100);
+                    sp.ReadExisting();
+                }
+                catch (Exception e)
+                {
+                    Program.LogWrap.LogEntry(eid, SeverityCode.Failure, LogCat.Init, "Exception while opening serial port", e.ToString());
+                    Connected = false;
+                }
             }
             else
                 Connected = false;
@@ -158,13 +167,31 @@ namespace ActTest
                     if (sp.BytesToRead > 0)
                         DataRead += sp.ReadExisting();
                     DataRead = "";
-                    sp.WriteLine(Command);
-                    result = OpResult.TimedOut; // presume the worst
+                    result = OpResult.TimedOut; // presume the worst likely outcome
+                    try
+                    {
+                        sp.WriteLine(Command);
+                    }
+                    catch (Exception e)
+                    {
+                        Program.LogWrap.LogEntry(eidCommand, SeverityCode.Failure, LogCat.Response, "Exception while writing to serial port", e.ToString());
+                        result = OpResult.Unknown;
+                    }
                     uint tickStarted = (uint)Environment.TickCount;
                     while (ElapsedTicks(tickStarted) < 1000)
                     {
-                        if (sp.BytesToRead > 0)
-                            DataRead += sp.ReadExisting();
+                        try
+                        {
+                            if (sp.BytesToRead > 0)
+                                DataRead += sp.ReadExisting();
+                        }
+                        catch (Exception e)
+                        {
+                            Program.LogWrap.LogEntry(eidCommand, SeverityCode.Failure, LogCat.Response, "Exception while reading from serial port", e.ToString());
+                            result = OpResult.Unknown;
+                            break;
+                        }
+
                         // Look for command prompt that marks end of response
                         index = DataRead.IndexOf(CmdPrompt);
                         if (index >= 0)
